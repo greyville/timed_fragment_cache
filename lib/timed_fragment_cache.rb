@@ -132,15 +132,15 @@ module ActionView
       end
 
       def cache_with_expiry(name = {}, expires = nil, &block)
-        if expires && @controller.fragment_expired?(name)
-          @controller.expire_and_write_meta(name, expires)
+        if expires && controller.fragment_expired?(name)
+          controller.expire_and_write_meta(name, expires)
         end
         cache_without_expiry(name, &block)
       end
 
       def cache_without_dogpile(name = {}, expires = nil, &block)
-        if expires && @controller.fragment_expired?(name)
-          @controller.expire_without_dogpile(name, expires, &block)
+        if expires && controller.fragment_expired?(name)
+          controller.expire_without_dogpile(name, expires, &block)
         else
           cache_without_expiry(name, &block)
         end
